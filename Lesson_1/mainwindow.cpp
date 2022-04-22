@@ -22,24 +22,25 @@ void MainWindow::on_btn_solve_clicked()
     b = ui->l_b->text().toDouble();
     c = ui->l_c->text().toDouble();
 
-    if(a != 0) ui->l_answer->setText(SolveQuadraticEquation());
-    else ui->l_answer->setText(SolveLinearEquation());
+    if(!qFuzzyIsNull(a))
+        ui->l_answer->setText(SolveQuadraticEquation());
+    else
+        ui->l_answer->setText(SolveLinearEquation());
 }
 
 QString MainWindow::SolveQuadraticEquation()
 {
-    QString answer;
     double discr = qPow(b, 2) - 4 * a * c;
-    if (discr < 0) answer = "Нет корней";
-    if (discr == 0) answer = "X = " + answer.setNum((-b/(2*a)));
+    if (discr < 0) return QString {"Нет корней"};
+    if (discr == 0) return QString {"X = %1"}.arg((-b/(2*a)));
     if (discr > 0)
     {
         QString x1, x2;
         x1.setNum((-b + qSqrt(discr)) / (2 * a));
         x2.setNum((-b - qSqrt(discr)) / (2 * a));
-        answer = "X1 = " + x1 + ", X2 = " + x2;
+        return QString {"X1 = " + x1 + ", X2 = " + x2};
     }
-    return answer;
+    return QString {};
 }
 
 QString MainWindow::SolveLinearEquation()
@@ -86,7 +87,7 @@ void MainWindow::on_fromSecondtoFirstBtn_clicked()
 
 void MainWindow::on_setHtmlBtn_clicked()
 {
-    QTextDocument *text = new QTextDocument;
-    text->setHtml("<font color='red'>Text from html code</font>");
-    ui->secondTextEdit->setPlainText(text->toPlainText());
+    QTextDocument text;
+    text.setHtml("<font color='red'>Text from html code</font>");
+    ui->secondTextEdit->setPlainText(text.toPlainText());
 }
