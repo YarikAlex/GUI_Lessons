@@ -1,6 +1,9 @@
 QT       += core gui
+TRANSLATIONS += switchlang_ru.ts switchlang_en.ts switchlang_fr.ts
+CODECFORSRC = UTF-8
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
 TARGET = NoteBook
 TEMPLATE = app
 CONFIG += c++17
@@ -11,17 +14,20 @@ CONFIG += c++17
 
 SOURCES += \
     help_form.cpp \
+    language.cpp \
     main.cpp \
     mainwindow.cpp \
     notebook.cpp
 
 HEADERS += \
     help_form.h \
+    language.h \
     mainwindow.h \
     notebook.h
 
 FORMS += \
     help_form.ui \
+    language.ui \
     mainwindow.ui
 
 # Default rules for deployment.

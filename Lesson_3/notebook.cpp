@@ -6,7 +6,7 @@
 
 Notebook::Notebook(QWidget *parent) : QWidget(parent)
 {
-
+    position = 0;
 }
 
 QString Notebook::openFile(QString oldText)
