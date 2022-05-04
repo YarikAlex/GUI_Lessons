@@ -4,6 +4,9 @@
 #include <QMainWindow>
 #include "help_form.h"
 #include "notebook.h"
+#include "language.h"
+#include <QTranslator>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,11 +28,24 @@ private slots:
     void on_action_open_triggered();
     void on_btn_open_clicked();
     void on_btn_save_clicked();
+    void on_btn_language_clicked();
+
+    void on_action_new_triggered();
+
+    void on_action_save_triggered();
+
+public slots:
+    void ChangeLanguage(QString);
 
 private:
     Ui::MainWindow *ui;
     HelpForm *help;
+    Language *languageForm;
     Notebook note;
+    QTranslator translator;
+
+
+    void SwitchLanguage(QString language);
 
 };
 #endif // MAINWINDOW_H

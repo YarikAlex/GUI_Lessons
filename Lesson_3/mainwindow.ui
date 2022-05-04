@@ -20,7 +20,7 @@
       <item>
        <widget class="QPushButton" name="btn_open">
         <property name="text">
-         <string>Открыть</string>
+         <string>&amp;Открыть</string>
         </property>
        </widget>
       </item>
@@ -35,6 +35,13 @@
        <widget class="QPushButton" name="btn_help">
         <property name="text">
          <string>Символы</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btn_language">
+        <property name="text">
+         <string>Язык</string>
         </property>
        </widget>
       </item>
@@ -58,7 +65,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar">
+  <widget class="QMenuBar" name="menu_bar">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -74,6 +81,7 @@
     <property name="title">
      <string>Файл</string>
     </property>
+    <addaction name="action_new"/>
     <addaction name="action_open"/>
     <addaction name="action_save"/>
     <addaction name="separator"/>
@@ -115,10 +123,18 @@
   </action>
   <action name="action_help">
    <property name="text">
-    <string>Посмотреть справку</string>
+    <string>Показать справку</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+H</string>
+   </property>
+  </action>
+  <action name="action_new">
+   <property name="text">
+    <string>Новый документ</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
    </property>
   </action>
  </widget>
