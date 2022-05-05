@@ -20,7 +20,7 @@
       <item>
        <widget class="QPushButton" name="btn_open">
         <property name="text">
-         <string>&amp;Открыть</string>
+         <string>Открыть</string>
         </property>
        </widget>
       </item>

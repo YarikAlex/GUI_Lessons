@@ -29,9 +29,7 @@ private slots:
     void on_btn_open_clicked();
     void on_btn_save_clicked();
     void on_btn_language_clicked();
-
     void on_action_new_triggered();
-
     void on_action_save_triggered();
 
 public slots:
