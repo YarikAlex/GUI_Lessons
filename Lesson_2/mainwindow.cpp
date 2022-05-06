@@ -9,8 +9,6 @@ MainWindow::MainWindow(QWidget *parent)
     myModel = new LanguageModel(this);
     ui->listView->setModel(myModel);
     ui->listView->setMovement(QListView::Free);
-
-
 }
 
 MainWindow::~MainWindow()
@@ -18,10 +16,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
 void MainWindow::on_pushButton_clicked()
 {
-    ui->plainTextEdit->setPlainText(sym.findSymbol(ui->plainTextEdit->toPlainText()));
+    QString text = ui->plainTextEdit->toPlainText();
+    ui->plainTextEdit->setPlainText(sym.findSymbol(text));
 }
 
 void MainWindow::on_IconMode_checkBox_clicked(bool checked)
@@ -30,20 +28,16 @@ void MainWindow::on_IconMode_checkBox_clicked(bool checked)
     {
         ui->listView->setViewMode(QListView::IconMode);
     }
-    if(!checked)
+    else
         ui->listView->setViewMode(QListView::ListMode);
 }
-
 
 void MainWindow::on_btn_addLanguage_clicked()
 {
     myModel->addNewLanguage(ui->line_newLanguage->text());
 }
 
-
-
 void MainWindow::on_btn_removeLanguage_clicked()
 {
     myModel->removeRows(ui->listView->currentIndex().row(), 1);
 }
-
