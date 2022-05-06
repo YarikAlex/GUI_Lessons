@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
 #include <QFile>
 #include <QTextStream>
 #include <QDebug>
@@ -10,16 +9,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
-
-
 
 //actions
 void MainWindow::on_action_exit_triggered()
@@ -31,7 +26,6 @@ void MainWindow::on_action_help_triggered()
 {
     help = new HelpForm(this);
     help->show();
-
 }
 
 void MainWindow::on_action_open_triggered()
@@ -42,7 +36,8 @@ void MainWindow::on_action_open_triggered()
 //buttons
 void MainWindow::on_btn_help_clicked()
 {
-    ui->textEdit->setText(note.setUnicodeSymbols(ui->textEdit->toPlainText()));
+    QString text = ui->textEdit->toPlainText();
+    ui->textEdit->setText(note.setUnicodeSymbols(text));
 }
 
 void MainWindow::on_btn_open_clicked()
