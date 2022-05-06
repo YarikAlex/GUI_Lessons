@@ -2,27 +2,27 @@
 #define FINDSYMBOL_H
 #include <QString>
 #include <QDebug>
+#include <vector>
+#include <utility>
 
 class FindSymbol
 {
 public:
     FindSymbol();
-    QString findSymbol(QString);
-    QString changeSymbol(QString, QString, uint);
+    QString findSymbol(QString&);
 
 private:
-    qsizetype position;
+    qsizetype position = 0;
     QString _author = "(c)";
     QString _euro = "@EURO@";
     QString _ruble = "@RUB@";
     QString _ppm = "@ppm@";
     QString _symbolR = "(R)";
-    uint _authorUni = 0x00A9;
-    uint _euroUni = 0x20AC;
-    uint _rubleUni = 0x20BD;
-    uint _ppmUni = 0x2030;
-    uint _symbolRUni = 0x00AE;
-
+    QString _authorUni = QChar(0x00A9);
+    QString _euroUni = QChar(0x20AC);
+    QString _rubleUni = QChar(0x20BD);
+    QString _ppmUni = QChar(0x2030);
+    QString _symbolRUni = QChar(0x00AE);
 };
 
 #endif // FINDSYMBOL_H
