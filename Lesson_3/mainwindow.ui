@@ -93,8 +93,16 @@
     </property>
     <addaction name="action_help"/>
    </widget>
+   <widget class="QMenu" name="menuStyle">
+    <property name="title">
+     <string>Стиль</string>
+    </property>
+    <addaction name="action_dark"/>
+    <addaction name="action_light"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
+   <addaction name="menuStyle"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_open">
@@ -135,6 +143,16 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="action_dark">
+   <property name="text">
+    <string>Темная тема</string>
+   </property>
+  </action>
+  <action name="action_light">
+   <property name="text">
+    <string>Светлая тема</string>
    </property>
   </action>
  </widget>

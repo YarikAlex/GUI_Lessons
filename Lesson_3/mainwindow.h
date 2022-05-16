@@ -20,7 +20,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-
 private slots:
     void on_action_exit_triggered();
     void on_action_help_triggered();
@@ -31,6 +30,8 @@ private slots:
     void on_btn_language_clicked();
     void on_action_new_triggered();
     void on_action_save_triggered();
+    void on_action_dark_triggered();
+    void on_action_light_triggered();
 
 public slots:
     void ChangeLanguage(QString);
@@ -41,8 +42,25 @@ private:
     Language *languageForm;
     Notebook note;
     QTranslator translator;
-
-
+    bool darkStyle;
+    const QString darkStyleMainWindow = "QMainWindow {background-color: black}"
+                                        "QMenuBar {color: grey; background-color: black}"
+                                        "QMenuBar::item:selected {background: grey; color: black}"
+                                        "QPushButton {color: grey; background-color: black}"
+                                        "QTextEdit {color: grey; background-color: black}"
+                                        "QMenu {background-color: grey; border: 0.5px solid black}";
+    const QString darkStyleHelpForm =   "QLabel {color: grey}"
+                                        "QDialog {background-color: black}";
+    const QString darkStyleLanguage =   "QDialog {background-color: black}"
+                                        "QLabel {color: grey}"
+                                        "QComboBox {background-color: black; color: grey; border: 0.5px solid grey; border-radius: 3px;}";
+    const QString lightStyleMainWindow = "QMainWindow {background-color: #f5f5f5}"
+                                         "QMenuBar {color: black; background-color: #f5f5f5}"
+                                         "QMenuBar::item:selected {background: #add8e6; color: black}"
+                                         "QPushButton {color: black; background-color: #f5f5f5;}"
+                                         "QTextEdit {color: black; background-color: white}"
+                                         "QMenu {background-color: #f5f5f5; color: black; border: none}"
+                                         "QMenu::item::selected {background: #add8e6; color: black}";
     void SwitchLanguage(QString language);
 
 };
