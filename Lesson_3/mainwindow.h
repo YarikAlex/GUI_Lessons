@@ -5,6 +5,7 @@
 #include "help_form.h"
 #include "notebook.h"
 #include "language.h"
+#include "filesystembrowser.h"
 #include <QTranslator>
 
 
@@ -42,13 +43,15 @@ private:
     Language *languageForm;
     Notebook note;
     QTranslator translator;
+    FileSystemBrowser browser;
     bool darkStyle;
     const QString darkStyleMainWindow = "QMainWindow {background-color: black}"
                                         "QMenuBar {color: grey; background-color: black}"
                                         "QMenuBar::item:selected {background: grey; color: black}"
                                         "QPushButton {color: grey; background-color: black}"
                                         "QTextEdit {color: grey; background-color: black}"
-                                        "QMenu {background-color: grey; border: 0.5px solid black}";
+                                        "QMenu {background-color: grey; border: 0.5px solid black}"
+                                        "QTreeView {color: grey; background-color: black}";
     const QString darkStyleHelpForm =   "QLabel {color: grey}"
                                         "QDialog {background-color: black}";
     const QString darkStyleLanguage =   "QDialog {background-color: black}"
