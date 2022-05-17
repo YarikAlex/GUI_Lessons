@@ -47,7 +47,8 @@ void MainWindow::on_action_save_triggered()
 //buttons
 void MainWindow::on_btn_help_clicked()
 {
-    ui->textEdit->setText(note.setUnicodeSymbols(ui->textEdit->toPlainText()));
+    QString text = ui->textEdit->toPlainText();
+    ui->textEdit->setText(note.setUnicodeSymbols(text));
 }
 
 void MainWindow::on_btn_open_clicked()

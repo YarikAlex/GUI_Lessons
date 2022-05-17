@@ -67,12 +67,3 @@ QString Notebook::setUnicodeSymbols(QString& text)
     }
     return text;
 }
-
-QString Notebook::changeSymbol(QString string, QString symbol, uint symbolUni)
-{
-    qsizetype indexpos = string.indexOf(symbol, position);
-        string.remove(indexpos, symbol.size());
-        string.insert(indexpos, QChar::fromUcs4(symbolUni));
-
-        return string;
-}
