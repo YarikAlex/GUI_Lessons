@@ -13,10 +13,8 @@ public:
     Notebook(QWidget *parent = nullptr);
     QString openFile(QString);
     void saveFile(QString);
-    QString setUnicodeSymbols(QString);
+    QString setUnicodeSymbols(QString&);
 private:
-    QString changeSymbol(QString, QString, uint);
-
     QString _filter = "text files (*.txt);; All(*.*)";
     qsizetype position;
     QString _author = "(c)";
@@ -24,11 +22,11 @@ private:
     QString _ruble = "@RUB@";
     QString _ppm = "@ppm@";
     QString _symbolR = "(R)";
-    uint _authorUni = 0x00A9;
-    uint _euroUni = 0x20AC;
-    uint _rubleUni = 0x20BD;
-    uint _ppmUni = 0x2030;
-    uint _symbolRUni = 0x00AE;
+    QString _authorUni = QChar(0x00A9);
+    QString _euroUni = QChar(0x20AC);
+    QString _rubleUni = QChar(0x20BD);
+    QString _ppmUni = QChar(0x2030);
+    QString _symbolRUni = QChar(0x00AE);
 };
 
 #endif // NOTEBOOK_H
