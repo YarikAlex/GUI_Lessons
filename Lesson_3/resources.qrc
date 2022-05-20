@@ -4,5 +4,8 @@
         <file>languges/switchlang_en.qm</file>
         <file>languges/switchlang_fr.qm</file>
         <file>languges/switchlang_ru.qm</file>
+        <file>images/newIcon.png</file>
+        <file>images/openIcon.png</file>
+        <file>images/saveIcon.png</file>
     </qresource>
 </RCC>

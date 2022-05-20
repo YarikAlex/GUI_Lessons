@@ -7,6 +7,8 @@
 #include "language.h"
 #include "filesystembrowser.h"
 #include <QTranslator>
+#include <QPrinter>
+#include <QPrintDialog>
 
 
 QT_BEGIN_NAMESPACE
@@ -24,15 +26,17 @@ public:
 private slots:
     void on_action_exit_triggered();
     void on_action_help_triggered();
-    void on_btn_help_clicked();
+    //void on_btn_help_clicked();
     void on_action_open_triggered();
-    void on_btn_open_clicked();
-    void on_btn_save_clicked();
-    void on_btn_language_clicked();
+//    void on_btn_open_clicked();
+//    void on_btn_save_clicked();
+    void on_language();
     void on_action_new_triggered();
     void on_action_save_triggered();
     void on_action_dark_triggered();
     void on_action_light_triggered();
+    void on_action_print_triggered();
+    void on_symbols();
 
 public slots:
     void ChangeLanguage(QString);

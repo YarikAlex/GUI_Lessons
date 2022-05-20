@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui printsupport
 TRANSLATIONS += switchlang_ru.ts switchlang_en.ts switchlang_fr.ts
 CODECFORSRC = UTF-8
 

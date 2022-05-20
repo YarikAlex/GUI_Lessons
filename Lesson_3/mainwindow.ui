@@ -15,55 +15,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="1">
-     <widget class="QTextEdit" name="textEdit"/>
-    </item>
-    <item row="0" column="0" colspan="4">
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QPushButton" name="btn_open">
-        <property name="text">
-         <string>Открыть</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btn_save">
-        <property name="text">
-         <string>Сохранить</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btn_help">
-        <property name="text">
-         <string>Символы</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btn_language">
-        <property name="text">
-         <string>Язык</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </item>
-    <item row="1" column="0">
+    <item row="0" column="0">
      <widget class="QTreeView" name="treeView">
       <property name="maximumSize">
        <size>
@@ -72,6 +24,9 @@
        </size>
       </property>
      </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QTextEdit" name="textEdit"/>
     </item>
    </layout>
   </widget>
@@ -94,6 +49,7 @@
     <addaction name="action_new"/>
     <addaction name="action_open"/>
     <addaction name="action_save"/>
+    <addaction name="action_print"/>
     <addaction name="separator"/>
     <addaction name="action_exit"/>
    </widget>
@@ -163,6 +119,14 @@
   <action name="action_light">
    <property name="text">
     <string>Светлая тема</string>
+   </property>
+  </action>
+  <action name="action_print">
+   <property name="text">
+    <string>Печать</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
    </property>
   </action>
  </widget>
