@@ -4,6 +4,8 @@
 #include <QTextStream>
 #include <QDebug>
 #include <QPalette>
+#include <QPainter>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -61,10 +63,10 @@ void MainWindow::on_btn_save_clicked()
     this->on_action_save_triggered();
 }
 
-void MainWindow::SwitchLanguage(QString language)
+void MainWindow::on_action_new_triggered()
 {
-    translator.load(":/languges/switchlang_" + language);
-    qApp->installTranslator(&translator);
+    MainWindow *newWindow = new MainWindow(this);
+    newWindow->show();
 }
 
 void MainWindow::on_btn_language_clicked()
@@ -76,24 +78,11 @@ void MainWindow::on_btn_language_clicked()
     connect(languageForm, SIGNAL(ChooseLanguage(QString)), this,SLOT(ChangeLanguage(QString)));
 }
 
-void MainWindow::ChangeLanguage(QString language)
-{
-    SwitchLanguage(language);
-}
-
-
-void MainWindow::on_action_new_triggered()
-{
-    MainWindow *newWindow = new MainWindow(this);
-    newWindow->show();
-}
-
 void MainWindow::on_action_dark_triggered()
 {
     this->setStyleSheet(darkStyleMainWindow);
     darkStyle = true;
 }
-
 
 void MainWindow::on_action_light_triggered()
 {
@@ -101,3 +90,24 @@ void MainWindow::on_action_light_triggered()
     darkStyle = false;
 }
 
+void MainWindow::on_action_print_triggered()
+{
+    QPrinter printer;
+    QPrintDialog dlg(&printer, this);
+    dlg.setWindowTitle(tr("Print"));
+    if(dlg.exec() != QDialog::Accepted)
+        return;
+    ui->textEdit->print(&printer);
+}
+
+//methods
+void MainWindow::SwitchLanguage(QString language)
+{
+    translator.load(":/languges/switchlang_" + language);
+    qApp->installTranslator(&translator);
+}
+
+void MainWindow::ChangeLanguage(QString language)
+{
+    SwitchLanguage(language);
+}
