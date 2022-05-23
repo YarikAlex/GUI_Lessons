@@ -1,6 +1,7 @@
 #include "notebook.h"
 #include <QStringDecoder>
 #include <QTextStream>
+#include <QMessageBox>
 #include <QDebug>
 #include <vector>
 #include <utility>
@@ -66,4 +67,28 @@ QString Notebook::setUnicodeSymbols(QString& text)
         text.replace(iter.first, iter.second);
     }
     return text;
+}
+
+QTextCharFormat Notebook::changeFontFormat(QFont& font)
+{
+    QFontDialog fntDlg(font);
+    bool isOk = false;
+    QFont newFont {fntDlg.getFont(&isOk)};
+    if(isOk)
+    {
+        QTextCharFormat format;
+        format.setFont(newFont);
+        return format;
+    }
+    return QTextCharFormat {};
+}
+
+void Notebook::getTextFormatting(QTextCharFormat& formatting)
+{
+    _buffer = formatting;
+    QMessageBox msg(this);
+    msg.setWindowTitle(tr("Information"));
+    msg.setIcon(QMessageBox::Information);
+    msg.setText(tr("Text formatting copied to clipboard"));
+    msg.exec();
 }

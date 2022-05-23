@@ -26,10 +26,7 @@ public:
 private slots:
     void on_action_exit_triggered();
     void on_action_help_triggered();
-    //void on_btn_help_clicked();
     void on_action_open_triggered();
-//    void on_btn_open_clicked();
-//    void on_btn_save_clicked();
     void on_language();
     void on_action_new_triggered();
     void on_action_save_triggered();
@@ -37,6 +34,12 @@ private slots:
     void on_action_light_triggered();
     void on_action_print_triggered();
     void on_symbols();
+    void on_font();
+    void on_left();
+    void on_center();
+    void on_right();
+    void on_copyFormate();
+    void on_pastFormate();
 
 public slots:
     void ChangeLanguage(QString);
@@ -69,6 +72,8 @@ private:
                                          "QMenu {background-color: #f5f5f5; color: black; border: none}"
                                          "QMenu::item::selected {background: #add8e6; color: black}";
     void SwitchLanguage(QString language);
-
+    void SetFontToolBar();
+    void SetFileToolBar();
+    void SetEditToolBar();
 };
 #endif // MAINWINDOW_H
