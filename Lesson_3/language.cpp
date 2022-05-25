@@ -6,19 +6,21 @@ Language::Language(QWidget *parent) :
     ui(new Ui::Language)
 {
     ui->setupUi(this);
-    this->resize(200, 200);
+    this->resize(150, 150);
     text = new QLabel(this);
     text->setText(tr("Выберите язык"));
-    text->resize(150, 20);
-    text->move(50,50);
+    text->setGeometry(30, 20, 100, 25);
+
     box_language = new QComboBox(this);
+    box_language->setGeometry(text->geometry().x(), text->geometry().y()+text->geometry().height()+5, 100, 25);
     box_language->addItem(tr("Русский"));
     box_language->addItem(tr("Английский"));
     box_language->addItem(tr("Французский"));
-    box_language->move(50, 80);
+
     btn_accept = new QPushButton(this);
     btn_accept->setText(tr("Принять"));
-    btn_accept->move(100, 150);
+    btn_accept->setGeometry(box_language->geometry().x(), box_language->geometry().y()+ box_language->geometry().height()+10, 100, 25);
+
     connect(btn_accept, SIGNAL(clicked()), this, SLOT(CloseForm()));
 }
 

@@ -6,6 +6,9 @@
 #include <QFileDialog>
 #include <QDir>
 #include <QStandardPaths>
+#include <QFont>
+#include <QTextCharFormat>
+#include <QFontDialog>
 
 class Notebook : public QWidget
 {
@@ -14,6 +17,9 @@ public:
     QString openFile(QString);
     void saveFile(QString);
     QString setUnicodeSymbols(QString&);
+    QTextCharFormat changeFontFormat(QFont &);
+    void getTextFormatting(QTextCharFormat &);
+    QTextCharFormat setTextFormatting(){return _buffer;}
 private:
     QString _filter = "text files (*.txt);; All(*.*)";
     qsizetype position;
@@ -27,6 +33,7 @@ private:
     QString _rubleUni = QChar(0x20BD);
     QString _ppmUni = QChar(0x2030);
     QString _symbolRUni = QChar(0x00AE);
+    QTextCharFormat _buffer;
 };
 
 #endif // NOTEBOOK_H

@@ -3,3 +3,5 @@ Examples/
 build-Lesson_2-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/
 build-Lesson_3-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/
 *.ts
+build-Painter-Desktop_Qt_6_2_3_MinGW_64_bit-Debug/
+Painter/.*
