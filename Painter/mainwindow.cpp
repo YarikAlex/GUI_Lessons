@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QColor>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -23,7 +24,7 @@ void MainWindow::paintEvent(QPaintEvent*)
     _brush.setStyle(Qt::BrushStyle::FDiagPattern);
     _painter.setPen(_pen);
     _painter.setBrush(_brush);
-
+    _painter.setTransform(_transform);
     switch (_count)
     {
         case 0:
@@ -51,6 +52,21 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
         ++_count;
         QWidget::repaint();
         if(_count == 3) _count = 0;
+    }
+}
+
+void MainWindow::wheelEvent(QWheelEvent *event)
+{
+    QPoint degrees = event->angleDelta()/8;
+    if(degrees.y()>0)
+    {
+        _transform.scale(1.1, 1.1);
+        QWidget::repaint();
+    }
+    else
+    {
+        _transform.scale(0.9, 0.9);
+        QWidget::repaint();
     }
 }
 

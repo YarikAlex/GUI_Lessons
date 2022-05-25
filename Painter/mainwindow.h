@@ -6,6 +6,7 @@
 #include <QPen>
 #include <QBrush>
 #include <QMouseEvent>
+#include <QWheelEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,6 +24,7 @@ private:
     Ui::MainWindow *ui;
     ushort _count = 0;
     QPainter _painter;
+    QTransform _transform;
     QPen _pen;
     QBrush _brush;
     const QRectF _rectangle{50, 60, 200, 150};
@@ -35,6 +37,6 @@ private:
 protected:
     void paintEvent(QPaintEvent*) override;
     void mousePressEvent(QMouseEvent* event) override;
-
+    void wheelEvent(QWheelEvent* event) override;
 };
 #endif // MAINWINDOW_H
