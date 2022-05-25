@@ -2,19 +2,20 @@
 #include <QStringDecoder>
 #include <QTextStream>
 #include <QDebug>
+#include <QStringLiteral>
 #include <vector>
 #include <utility>
 
-
 Notebook::Notebook(QWidget *parent) : QWidget(parent) {}
 
-QString Notebook::openFile(QString oldText)
+QString Notebook::openFile(const QString& oldText)
 {
     QString filename = QFileDialog::getOpenFileName(this, tr("Открыть файл"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), _filter);
     if(filename.length()>0)
     {
-        int textIndex = filename.indexOf(".txt");
-        if(textIndex != -1 && filename.length() - 4 == textIndex)
+       // int textIndex = filename.indexOf(".txt");
+        const QString txtFormat {QStringLiteral(".txt")};
+        if(filename.endsWith(txtFormat)&&filename.length() > txtFormat.size())
         {
             QFile file(filename);
             if(file.open(QFile::ReadOnly | QFile::ExistingOnly))
@@ -33,14 +34,13 @@ QString Notebook::openFile(QString oldText)
     return oldText;
 }
 
-void Notebook::saveFile(QString text)
+void Notebook::saveFile(const QString& text)
 {
     QString filename = QFileDialog::getSaveFileName(this, tr("Сохранить файл"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), _filter);
     if(filename.length() > 0)
     {
-
-        int textIndex = filename.indexOf(".txt");
-        if(textIndex != -1 && filename.length() - 4 == textIndex)
+        const QString txtFormat {QStringLiteral(".txt")};
+        if(filename.endsWith(txtFormat)&&filename.length() > txtFormat.size())
         {
             QFile file(filename);
             if(file.open(QFile::WriteOnly))

@@ -24,7 +24,8 @@ void MainWindow::on_action_exit_triggered()
 
 void MainWindow::on_action_help_triggered()
 {
-    help = new HelpForm(this);
+    if(help == nullptr)
+        help = new HelpForm(this);
     help->show();
 }
 
@@ -44,7 +45,6 @@ void MainWindow::on_btn_open_clicked()
 {
     this->on_action_open_triggered();
 }
-
 
 void MainWindow::on_btn_save_clicked()
 {

@@ -20,8 +20,7 @@ private slots:
 
 private:
     Ui::HelpForm *ui;
-
-    QString loadText(QString dir);
+    QString loadText(const QString &dir);
 };
 
 #endif // HELP_FORM_H
