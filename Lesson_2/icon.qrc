@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>img/C#.png</file>
+        <file>img/C++.png</file>
+        <file>img/Java.png</file>
+        <file>img/javascript.png</file>
+        <file>img/php.png</file>
+        <file>img/python.png</file>
+        <file>img/c#.png</file>
+        <file>img/c++.png</file>
+        <file>img/java.png</file>
+        <file>img/new.png</file>
+    </qresource>
+</RCC>
