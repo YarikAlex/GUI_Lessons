@@ -2,7 +2,6 @@
 #include <QStringDecoder>
 #include <QTextStream>
 #include <QDebug>
-#include <QStringLiteral>
 #include <vector>
 #include <utility>
 
@@ -10,34 +9,26 @@ Notebook::Notebook(QWidget *parent) : QWidget(parent) {}
 
 QString Notebook::openFile(const QString& oldText)
 {
-    QString filename = QFileDialog::getOpenFileName(this, tr("Открыть файл"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), _filter);
-    if(filename.length()>0)
+    const QString filename {QFileDialog::getOpenFileName(this, tr("Открыть файл"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), _filter)};
+    if(filename.isEmpty())
+        return QString{};
+    else
     {
-       // int textIndex = filename.indexOf(".txt");
-        const QString txtFormat {QStringLiteral(".txt")};
-        if(filename.endsWith(txtFormat)&&filename.length() > txtFormat.size())
+        QFile file(filename);
+        if(file.open(QFile::ReadOnly | QFile::ExistingOnly))
         {
-            QFile file(filename);
-            if(file.open(QFile::ReadOnly | QFile::ExistingOnly))
-            {
-                QTextStream stream(&file);
-                auto toUtf16 = QStringDecoder(QStringDecoder::Utf8);
-                return toUtf16(stream.readAll().toUtf8());
-            }
-            else
-            {
-                qDebug() << "Error: " << file.errorString();
-            }
+            QTextStream stream(&file);
+            auto toUtf16 = QStringDecoder(QStringDecoder::Utf8);
+            return toUtf16(stream.readAll().toUtf8());
         }
-        return oldText;// it would be better to show the user the message "Invalid file extension"
+       return oldText;
     }
-    return oldText;
 }
 
 void Notebook::saveFile(const QString& text)
 {
-    QString filename = QFileDialog::getSaveFileName(this, tr("Сохранить файл"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), _filter);
-    if(filename.length() > 0)
+    const QString filename {QFileDialog::getSaveFileName(this, tr("Сохранить файл"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), _filter)};
+    if(!filename.isEmpty())
     {
         const QString txtFormat {QStringLiteral(".txt")};
         if(filename.endsWith(txtFormat)&&filename.length() > txtFormat.size())

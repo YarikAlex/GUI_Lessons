@@ -15,7 +15,7 @@ public:
     void saveFile(const QString &);
     QString setUnicodeSymbols(QString &);
 private:
-    QString _filter = "text files (*.txt);; All(*.*)";
+    QString _filter = "text files (*.txt)";
     qsizetype position = 0;
     QString _author = "(c)";
     QString _euro = "@EURO@";
