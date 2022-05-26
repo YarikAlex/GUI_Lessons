@@ -1,16 +1,18 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
 #include <QFile>
 #include <QTextStream>
 #include <QDebug>
+#include <QPalette>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->treeView->setModel(browser.getCurrentModel());
     SwitchLanguage(QLocale::system().name());
+    darkStyle = false;
 }
 
 MainWindow::~MainWindow()
@@ -27,7 +29,9 @@ void MainWindow::on_action_exit_triggered()
 void MainWindow::on_action_help_triggered()
 {
     help = new HelpForm(this);
-    help->show();
+    if(darkStyle)
+        help->setStyleSheet(darkStyleHelpForm);
+    help->show(); 
 }
 
 void MainWindow::on_action_open_triggered()
@@ -43,7 +47,8 @@ void MainWindow::on_action_save_triggered()
 //buttons
 void MainWindow::on_btn_help_clicked()
 {
-    ui->textEdit->setText(note.setUnicodeSymbols(ui->textEdit->toPlainText()));
+    QString text = ui->textEdit->toPlainText();
+    ui->textEdit->setText(note.setUnicodeSymbols(text));
 }
 
 void MainWindow::on_btn_open_clicked()
@@ -65,6 +70,8 @@ void MainWindow::SwitchLanguage(QString language)
 void MainWindow::on_btn_language_clicked()
 {
     languageForm = new Language(this);
+    if (darkStyle)
+        languageForm->setStyleSheet(darkStyleLanguage);
     languageForm->show();
     connect(languageForm, SIGNAL(ChooseLanguage(QString)), this,SLOT(ChangeLanguage(QString)));
 }
@@ -81,6 +88,16 @@ void MainWindow::on_action_new_triggered()
     newWindow->show();
 }
 
+void MainWindow::on_action_dark_triggered()
+{
+    this->setStyleSheet(darkStyleMainWindow);
+    darkStyle = true;
+}
 
 
+void MainWindow::on_action_light_triggered()
+{
+    this->setStyleSheet(lightStyleMainWindow);
+    darkStyle = false;
+}
 

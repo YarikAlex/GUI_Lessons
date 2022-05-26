@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>1004</width>
     <height>600</height>
    </rect>
   </property>
@@ -15,7 +15,10 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+    <item row="1" column="1">
+     <widget class="QTextEdit" name="textEdit"/>
+    </item>
+    <item row="0" column="0" colspan="4">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QPushButton" name="btn_open">
@@ -61,7 +64,14 @@
      </layout>
     </item>
     <item row="1" column="0">
-     <widget class="QTextEdit" name="textEdit"/>
+     <widget class="QTreeView" name="treeView">
+      <property name="maximumSize">
+       <size>
+        <width>200</width>
+        <height>16777215</height>
+       </size>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -70,7 +80,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1004</width>
      <height>21</height>
     </rect>
    </property>
@@ -93,8 +103,16 @@
     </property>
     <addaction name="action_help"/>
    </widget>
+   <widget class="QMenu" name="menuStyle">
+    <property name="title">
+     <string>Стиль</string>
+    </property>
+    <addaction name="action_dark"/>
+    <addaction name="action_light"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
+   <addaction name="menuStyle"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_open">
@@ -135,6 +153,16 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="action_dark">
+   <property name="text">
+    <string>Темная тема</string>
+   </property>
+  </action>
+  <action name="action_light">
+   <property name="text">
+    <string>Светлая тема</string>
    </property>
   </action>
  </widget>
