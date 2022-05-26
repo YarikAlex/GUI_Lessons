@@ -33,7 +33,7 @@ private slots:
     void on_action_save_triggered();
 
 public slots:
-    void ChangeLanguage(QString);
+    void ChangeLanguage(const QString &);
 
 private:
     Ui::MainWindow *ui;
@@ -43,7 +43,7 @@ private:
     QTranslator translator;
 
 
-    void SwitchLanguage(QString language);
+    void SwitchLanguage(const QString &language);
 
 };
 #endif // MAINWINDOW_H

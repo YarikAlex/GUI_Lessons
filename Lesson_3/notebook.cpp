@@ -3,45 +3,33 @@
 #include <QTextStream>
 #include <QDebug>
 
+#include <vector>
+#include <utility>
 
-Notebook::Notebook(QWidget *parent) : QWidget(parent)
-{
-    position = 0;
-}
+Notebook::Notebook(QWidget *parent) : QWidget(parent){}
 
-QString Notebook::openFile(QString oldText)
+QString Notebook::openFile(const QString& oldText)
 {
-    QString filename = QFileDialog::getOpenFileName(this, tr("Открыть файл"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), _filter);
-    if(filename.length()>0)
+    const QString filename {QFileDialog::getOpenFileName(this, tr("Открыть файл"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), _filter)};
+    if(filename.isEmpty())
+        return QString{};
+    QFile file(filename);
+    if(file.open(QFile::ReadOnly | QFile::ExistingOnly))
     {
-        int textIndex = filename.indexOf(".txt");
-        if(textIndex != -1 && filename.length() - 4 == textIndex)
-        {
-            QFile file(filename);
-            if(file.open(QFile::ReadOnly | QFile::ExistingOnly))
-            {
-                QTextStream stream(&file);
-                auto toUtf16 = QStringDecoder(QStringDecoder::Utf8);
-                return toUtf16(stream.readAll().toUtf8());
-            }
-            else
-            {
-                qDebug() << "Error: " << file.errorString();
-            }
-        }
-        return oldText;// it would be better to show the user the message "Invalid file extension"
+        QTextStream stream(&file);
+        auto toUtf16 = QStringDecoder(QStringDecoder::Utf8);
+        return toUtf16(stream.readAll().toUtf8());
     }
     return oldText;
 }
 
-void Notebook::saveFile(QString text)
+void Notebook::saveFile(const QString &text)
 {
-    QString filename = QFileDialog::getSaveFileName(this, tr("Сохранить файл"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), _filter);
-    if(filename.length() > 0)
+    QString filename {QFileDialog::getSaveFileName(this, tr("Сохранить файл"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation), _filter)};
+    if(!filename.isEmpty())
     {
-
-        int textIndex = filename.indexOf(".txt");
-        if(textIndex != -1 && filename.length() - 4 == textIndex)
+        const QString txtFormat {QStringLiteral(".txt")};
+        if(filename.endsWith(txtFormat) && filename.length() > txtFormat.size())
         {
             QFile file(filename);
             if(file.open(QFile::WriteOnly))
@@ -53,36 +41,16 @@ void Notebook::saveFile(QString text)
     }
 }
 
-QString Notebook::setUnicodeSymbols(QString text)
+QString Notebook::setUnicodeSymbols(QString& text)
 {
-    while(text.indexOf(_author, position) != -1)
-        {
-            text = changeSymbol(text, _author, _authorUni);
-        }
-        while(text.indexOf(_euro, position) != -1)
-        {
-            text = changeSymbol(text, _euro, _euroUni);
-        }
-        while(text.indexOf(_ruble, position) != -1)
-        {
-            text = changeSymbol(text, _ruble, _rubleUni);
-        }
-        while(text.indexOf(_ppm, position) != -1)
-        {
-            text = changeSymbol(text, _ppm, _ppmUni);
-        }
-        while(text.indexOf(_symbolR, position) != -1)
-        {
-            text = changeSymbol(text, _symbolR, _symbolRUni);
-        }
+    const std::vector<std::pair<QString&, QString&>> symbols = {{_author, _authorUni},
+                                                                {_euro, _euroUni},
+                                                                {_ruble, _rubleUni},
+                                                                {_ppm, _ppmUni},
+                                                                {_symbolR, _symbolRUni}};
+    for(const auto &iterSymbolPair: symbols)
+    {
+        text.replace(iterSymbolPair.first, iterSymbolPair.second);
+    }
         return text;
-}
-
-QString Notebook::changeSymbol(QString string, QString symbol, uint symbolUni)
-{
-    qsizetype indexpos = string.indexOf(symbol, position);
-        string.remove(indexpos, symbol.size());
-        string.insert(indexpos, QChar::fromUcs4(symbolUni));
-
-        return string;
 }

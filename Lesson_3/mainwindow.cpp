@@ -10,7 +10,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    SwitchLanguage(QLocale::system().name());
 }
 
 MainWindow::~MainWindow()
@@ -26,7 +25,8 @@ void MainWindow::on_action_exit_triggered()
 
 void MainWindow::on_action_help_triggered()
 {
-    help = new HelpForm(this);
+    if(help==nullptr)
+        help = new HelpForm(this);
     help->show();
 }
 
@@ -43,7 +43,8 @@ void MainWindow::on_action_save_triggered()
 //buttons
 void MainWindow::on_btn_help_clicked()
 {
-    ui->textEdit->setText(note.setUnicodeSymbols(ui->textEdit->toPlainText()));
+    QString text = ui->textEdit->toPlainText();
+    ui->textEdit->setText(note.setUnicodeSymbols(text));
 }
 
 void MainWindow::on_btn_open_clicked()
@@ -56,10 +57,10 @@ void MainWindow::on_btn_save_clicked()
     this->on_action_save_triggered();
 }
 
-void MainWindow::SwitchLanguage(QString language)
+void MainWindow::SwitchLanguage(const QString& language)
 {
-    translator.load(":/languges/switchlang_" + language);
-    qApp->installTranslator(&translator);
+    if(translator.load(":/languges/switchlang_" + language + ".qm"))
+        qApp->installTranslator(&translator);
 }
 
 void MainWindow::on_btn_language_clicked()
@@ -69,11 +70,10 @@ void MainWindow::on_btn_language_clicked()
     connect(languageForm, SIGNAL(ChooseLanguage(QString)), this,SLOT(ChangeLanguage(QString)));
 }
 
-void MainWindow::ChangeLanguage(QString language)
+void MainWindow::ChangeLanguage(const QString& language)
 {
     SwitchLanguage(language);
 }
-
 
 void MainWindow::on_action_new_triggered()
 {
