@@ -16,7 +16,7 @@ HelpForm::~HelpForm()
     delete ui;
 }
 
-QString HelpForm::loadText(QString dir)
+QString HelpForm::loadText(const QString &dir)
 {
     QFile file (dir);
     if(file.open(QIODevice::ReadOnly))
@@ -25,11 +25,6 @@ QString HelpForm::loadText(QString dir)
         return stream.read(file.size());
     }
     return QString {};
-
 }
 
-void HelpForm::on_btn_Ok_clicked()
-{
-    this->close();
-}
-
+void HelpForm::on_btn_Ok_clicked() { this->close(); }

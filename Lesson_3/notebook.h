@@ -11,8 +11,8 @@ class Notebook : public QWidget
 {
 public:
     Notebook(QWidget *parent = nullptr);
-    QString openFile(QString);
-    void saveFile(QString);
+    QString openFile(const QString&);
+    void saveFile(const QString&);
     QString setUnicodeSymbols(QString&);
 private:
     QString _filter = "text files (*.txt);; All(*.*)";
