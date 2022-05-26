@@ -20,7 +20,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-
 private slots:
     void on_action_exit_triggered();
     void on_action_help_triggered();
@@ -41,7 +40,6 @@ private:
     Language *languageForm;
     Notebook note;
     QTranslator translator;
-
 
     void SwitchLanguage(const QString &language);
 

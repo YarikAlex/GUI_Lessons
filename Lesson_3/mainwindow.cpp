@@ -3,7 +3,6 @@
 
 #include <QFile>
 #include <QTextStream>
-#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -80,7 +79,3 @@ void MainWindow::on_action_new_triggered()
     MainWindow *newWindow = new MainWindow(this);
     newWindow->show();
 }
-
-
-
-
