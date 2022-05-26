@@ -1,0 +1,39 @@
+QMainWindow {
+	background-color: black;
+}
+QMenuBar {
+	color: grey; 
+	background-color: black;
+}
+QMenuBar::item:selected {
+	background: grey;
+	color: black;
+}
+QPushButton {
+	color: grey;
+	background-color: black;
+}
+QTextEdit {
+	color: grey;
+	background-color: black;
+}
+QMenu {
+	background-color: grey;
+	border: 0.5px solid black;
+}
+QTreeView {
+	color: grey;
+	background-color: black;
+}
+QLabel {
+	color: grey;
+}
+QDialog {
+	background-color: black;
+}
+QComboBox {
+	background-color: black;
+	color: grey;
+	border: 0.5px solid grey;
+	border-radius: 3px;
+}

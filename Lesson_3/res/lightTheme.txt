@@ -1,0 +1,28 @@
+QMainWindow {
+	background-color: #f5f5f5;
+}
+QMenuBar {
+	color: black;
+	background-color: #f5f5f5;
+}
+QMenuBar::item:selected {
+	background: #add8e6;
+	color: black;
+}
+QPushButton {
+	color: black;
+	background-color: #f5f5f5;
+}
+QTextEdit {
+	color: black;
+	background-color: white;
+}
+QMenu {
+	background-color: #f5f5f5;
+	color: black;
+	border: none
+}
+QMenu::item::selected {
+	background: #add8e6;
+	color: black;
+}

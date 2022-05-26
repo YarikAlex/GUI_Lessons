@@ -4,5 +4,7 @@
         <file>languges/switchlang_en.qm</file>
         <file>languges/switchlang_fr.qm</file>
         <file>languges/switchlang_ru.qm</file>
+        <file>res/darkTheme.txt</file>
+        <file>res/lightTheme.txt</file>
     </qresource>
 </RCC>

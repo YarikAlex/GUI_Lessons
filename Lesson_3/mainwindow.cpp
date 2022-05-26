@@ -28,9 +28,10 @@ void MainWindow::on_action_exit_triggered()
 
 void MainWindow::on_action_help_triggered()
 {
-    help = new HelpForm(this);
+    if(help == nullptr)
+        help = new HelpForm(this);
     if(darkStyle)
-        help->setStyleSheet(darkStyleHelpForm);
+        help->setStyleSheet(loadTheme(darkThemePath));
     help->show(); 
 }
 
@@ -63,24 +64,34 @@ void MainWindow::on_btn_save_clicked()
 
 void MainWindow::SwitchLanguage(QString language)
 {
-    translator.load(":/languges/switchlang_" + language);
-    qApp->installTranslator(&translator);
+    if(translator.load(":/languges/switchlang_" + language + ".qm"))
+        qApp->installTranslator(&translator);
+}
+
+QString MainWindow::loadTheme(const QString &dir)
+{
+    QFile file (dir);
+    if(file.open(QIODevice::ReadOnly))
+    {
+        QTextStream stream(&file);
+        return stream.read(file.size());
+    }
+    return QString {};
 }
 
 void MainWindow::on_btn_language_clicked()
 {
     languageForm = new Language(this);
     if (darkStyle)
-        languageForm->setStyleSheet(darkStyleLanguage);
+        languageForm->setStyleSheet(loadTheme(darkThemePath));
     languageForm->show();
     connect(languageForm, SIGNAL(ChooseLanguage(QString)), this,SLOT(ChangeLanguage(QString)));
 }
 
-void MainWindow::ChangeLanguage(QString language)
+void MainWindow::ChangeLanguage(const QString &language)
 {
     SwitchLanguage(language);
 }
-
 
 void MainWindow::on_action_new_triggered()
 {
@@ -90,14 +101,12 @@ void MainWindow::on_action_new_triggered()
 
 void MainWindow::on_action_dark_triggered()
 {
-    this->setStyleSheet(darkStyleMainWindow);
+    this->setStyleSheet(loadTheme(darkThemePath));
     darkStyle = true;
 }
 
-
 void MainWindow::on_action_light_triggered()
 {
-    this->setStyleSheet(lightStyleMainWindow);
+    this->setStyleSheet(loadTheme(lightThemePath));
     darkStyle = false;
 }
-

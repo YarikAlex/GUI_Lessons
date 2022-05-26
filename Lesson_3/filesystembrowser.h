@@ -3,6 +3,8 @@
 
 #include <QWidget>
 #include <QStandardItemModel>
+#include <QDir>
+#include <QFileInfoList>
 
 class FileSystemBrowser : public QWidget
 {
@@ -10,7 +12,7 @@ class FileSystemBrowser : public QWidget
 public:
     explicit FileSystemBrowser(QWidget *parent = nullptr);
     ~FileSystemBrowser();
-    QStandardItemModel* getCurrentModel()const{return model;}
+    QStandardItemModel* getCurrentModel() const { return model; }
 
 private:
     QStandardItemModel* model;
