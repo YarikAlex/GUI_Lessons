@@ -9,6 +9,7 @@
 #include <QToolBar>
 #include <QIcon>
 #include <QMessageBox>
+#include <QCursor>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -126,6 +127,12 @@ void MainWindow::on_pastFormate()
     ui->textEdit->textCursor().setCharFormat(note.setTextFormatting());
 }
 
+void MainWindow::on_time()
+{
+    QDateTime dateTime {QDateTime::currentDateTime()};
+    ui->textEdit->textCursor().insertText(dateTime.toString("dd.MM.yyyy h:m:ss ap"));
+}
+
 //methods
 void MainWindow::SwitchLanguage(QString language)
 {
@@ -201,6 +208,11 @@ void MainWindow::SetEditToolBar()
     QAction *language = new QAction(tr("Language"), this);
     connect(language, &QAction::triggered, this, &MainWindow::on_language);
     editTool->addAction(language);
+
+    const QIcon timeIcon = QIcon::fromTheme("editTheme", QIcon(":/images/clockIcon.png"));
+    QAction *time = new QAction(timeIcon, tr("Time"), this);
+    connect(time, &QAction::triggered, this, &MainWindow::on_time);
+    editTool->addAction(time);
 
     this->addToolBar(editTool);
 }
