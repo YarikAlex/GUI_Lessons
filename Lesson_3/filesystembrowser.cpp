@@ -2,6 +2,7 @@
 #include <QDir>
 #include <QApplication>
 #include <QStyle>
+#include <QMessageBox>
 
 FileSystemBrowser::FileSystemBrowser(QWidget* parent) : QWidget(parent), model(nullptr)
 {
@@ -16,28 +17,52 @@ FileSystemBrowser::FileSystemBrowser(QWidget* parent) : QWidget(parent), model(n
 
     //set directories
     QDir dir(currentPath);
-    dir.setFilter(QDir::Hidden | QDir::NoSymLinks | QDir::Dirs);
-    QStringList foldersList = dir.entryList();
+    dir.setFilter(QDir::NoFilter | QDir::NoSymLinks | QDir::Dirs);
+    QFileInfoList foldersList = dir.entryInfoList();
     QList<QStandardItem*> folders;
-    for(int iter = 0; iter < foldersList.count(); ++iter)
+    for(auto &iter: foldersList)
     {
-        folders.append(new QStandardItem(QIcon(QApplication::style()->standardIcon(QStyle::SP_DirIcon)),
-                                         foldersList.at(iter)));
+        folders.append(new QStandardItem(QIcon(QApplication::style()->standardIcon(QStyle::SP_DirIcon)), iter.baseName()));
     }
     items.at(0)->appendRows(folders);
 
     //set files
-    dir.setFilter(QDir::Hidden | QDir::NoSymLinks | QDir::Files);
-    QList<QStandardItem*> files;
     for(int iter = 0; iter < foldersList.count(); ++iter)
     {
-        files.append(new QStandardItem(QIcon(QApplication::style()->standardIcon(QStyle::SP_FileIcon)),
-                                         foldersList.at(iter)));
+        QString newCurrentPath(foldersList.at(iter).filePath());
+        dir.setPath(newCurrentPath);
+        dir.setFilter(QDir::NoSymLinks|QDir::NoDotAndDotDot | QDir::Files|QDir::Dirs);
+        QFileInfoList filesList = dir.entryInfoList();
+        QList<QStandardItem*> files;
+        for(auto &iter: filesList)
+        {
+            if(iter.isFile())
+                files.append(new QStandardItem(QIcon(QApplication::style()->standardIcon(QStyle::SP_FileIcon)), iter.baseName()));
+            if(iter.isDir())
+                files.append(new QStandardItem(QIcon(QApplication::style()->standardIcon(QStyle::SP_DirIcon)), iter.baseName()));
+        }
+        folders.at(iter)->appendRows(files);
     }
-    items.at(0)->appendRows(files);
 }
 
 FileSystemBrowser::~FileSystemBrowser()
 {
     delete model;
+}
+
+void FileSystemBrowser::FindFile(const QString &fileName)
+{
+    if(fileName.isEmpty())
+        return;
+    _searcher = new Searcher(currentPath, fileName);
+    connect(_searcher, &Searcher::resultReady, this, &FileSystemBrowser::getResult);
+    connect(_searcher, &Searcher::finished, _searcher, &QObject::deleteLater);
+    _searcher->start();
+}
+
+void FileSystemBrowser::getResult(QString &result)
+{
+    QMessageBox msg;
+    msg.setText(result);
+    msg.exec();
 }

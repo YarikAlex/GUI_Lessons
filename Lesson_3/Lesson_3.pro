@@ -18,14 +18,16 @@ SOURCES += \
     language.cpp \
     main.cpp \
     mainwindow.cpp \
-    notebook.cpp
+    notebook.cpp \
+    searcher.cpp
 
 HEADERS += \
     filesystembrowser.h \
     help_form.h \
     language.h \
     mainwindow.h \
-    notebook.h
+    notebook.h \
+    searcher.h
 
 FORMS += \
     help_form.ui \

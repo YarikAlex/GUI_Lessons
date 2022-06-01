@@ -10,5 +10,6 @@
         <file>images/alignCenter.png</file>
         <file>images/alignLeft.png</file>
         <file>images/alignRight.png</file>
+        <file>images/clockIcon.png</file>
     </qresource>
 </RCC>

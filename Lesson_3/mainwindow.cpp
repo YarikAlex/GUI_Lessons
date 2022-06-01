@@ -9,6 +9,7 @@
 #include <QToolBar>
 #include <QIcon>
 #include <QMessageBox>
+#include <QDateTime>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -20,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     SetFontToolBar();
     ui->treeView->setModel(browser.getCurrentModel());
     darkStyle = false;
+    //ui->lineSearch->setText(browser.getCount());
 }
 
 MainWindow::~MainWindow()
@@ -126,6 +128,12 @@ void MainWindow::on_pastFormate()
     ui->textEdit->textCursor().setCharFormat(note.setTextFormatting());
 }
 
+void MainWindow::on_time()
+{
+    QDateTime dateTime {QDateTime::currentDateTime()};
+    ui->textEdit->textCursor().insertText(dateTime.toString("dd.MM.yyyy h:m:ss ap"));
+}
+
 //methods
 void MainWindow::SwitchLanguage(QString language)
 {
@@ -202,6 +210,11 @@ void MainWindow::SetEditToolBar()
     connect(language, &QAction::triggered, this, &MainWindow::on_language);
     editTool->addAction(language);
 
+    const QIcon timeIcon = QIcon::fromTheme("editTheme", QIcon(":/images/clockIcon.png"));
+    QAction *time = new QAction(timeIcon, tr("Time"), this);
+    connect(time, &QAction::triggered, this, &MainWindow::on_time);
+    editTool->addAction(time);
+
     this->addToolBar(editTool);
 }
 
@@ -209,3 +222,10 @@ void MainWindow::ChangeLanguage(QString language)
 {
     SwitchLanguage(language);
 }
+
+void MainWindow::on_btn_Find_clicked()
+{
+    QString text = ui->lineSearch->text();
+    browser.FindFile(text);
+}
+

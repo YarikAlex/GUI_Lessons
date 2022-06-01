@@ -10,7 +10,6 @@
 #include <QPrinter>
 #include <QPrintDialog>
 
-
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -40,6 +39,9 @@ private slots:
     void on_right();
     void on_copyFormate();
     void on_pastFormate();
+    void on_time();
+
+    void on_btn_Find_clicked();
 
 public slots:
     void ChangeLanguage(QString);
@@ -75,5 +77,6 @@ private:
     void SetFontToolBar();
     void SetFileToolBar();
     void SetEditToolBar();
+
 };
 #endif // MAINWINDOW_H
