@@ -41,6 +41,8 @@ private slots:
     void on_pastFormate();
     void on_time();
 
+    void on_btn_Find_clicked();
+
 public slots:
     void ChangeLanguage(QString);
 

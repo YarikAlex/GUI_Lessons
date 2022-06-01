@@ -2,6 +2,7 @@
 #include <QDir>
 #include <QApplication>
 #include <QStyle>
+#include <QMessageBox>
 
 FileSystemBrowser::FileSystemBrowser(QWidget* parent) : QWidget(parent), model(nullptr)
 {
@@ -19,7 +20,7 @@ FileSystemBrowser::FileSystemBrowser(QWidget* parent) : QWidget(parent), model(n
     dir.setFilter(QDir::NoFilter | QDir::NoSymLinks | QDir::Dirs);
     QFileInfoList foldersList = dir.entryInfoList();
     QList<QStandardItem*> folders;
-    for(auto iter: foldersList)
+    for(auto &iter: foldersList)
     {
         folders.append(new QStandardItem(QIcon(QApplication::style()->standardIcon(QStyle::SP_DirIcon)), iter.baseName()));
     }
@@ -47,4 +48,21 @@ FileSystemBrowser::FileSystemBrowser(QWidget* parent) : QWidget(parent), model(n
 FileSystemBrowser::~FileSystemBrowser()
 {
     delete model;
+}
+
+void FileSystemBrowser::FindFile(const QString &fileName)
+{
+    if(fileName.isEmpty())
+        return;
+    _searcher = new Searcher(currentPath, fileName);
+    connect(_searcher, &Searcher::resultReady, this, &FileSystemBrowser::getResult);
+    connect(_searcher, &Searcher::finished, _searcher, &QObject::deleteLater);
+    _searcher->start();
+}
+
+void FileSystemBrowser::getResult(QString &result)
+{
+    QMessageBox msg;
+    msg.setText(result);
+    msg.exec();
 }

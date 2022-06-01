@@ -9,7 +9,7 @@
 #include <QToolBar>
 #include <QIcon>
 #include <QMessageBox>
-#include <QCursor>
+#include <QDateTime>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     SetFontToolBar();
     ui->treeView->setModel(browser.getCurrentModel());
     darkStyle = false;
+    //ui->lineSearch->setText(browser.getCount());
 }
 
 MainWindow::~MainWindow()
@@ -221,3 +222,10 @@ void MainWindow::ChangeLanguage(QString language)
 {
     SwitchLanguage(language);
 }
+
+void MainWindow::on_btn_Find_clicked()
+{
+    QString text = ui->lineSearch->text();
+    browser.FindFile(text);
+}
+
